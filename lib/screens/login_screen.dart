@@ -9,7 +9,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  bool isSessionSaved = false; // Variable para verificar si la sesión está guardada
+  bool isSessionSaved =
+      false; // Variable para verificar si la sesión está guardada
 
   @override
   void initState() {

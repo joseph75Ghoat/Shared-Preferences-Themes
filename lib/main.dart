@@ -4,8 +4,10 @@ import 'package:login/assets/global_values.dart';
 import 'package:login/assets/stylesApp.dart';
 import 'package:login/card_background.dart';
 import 'package:login/routes.dart';
+import 'package:login/screens/preferencias_tema.dart';
 
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 
 void main() => runApp(MyApp());
@@ -13,22 +15,25 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  
+ 
+@override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-        valueListenable: GlobalValues.flagTheme,
-        builder: (context, value, _) {
+    return ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
           return MaterialApp(
-              home: Home(),
-              routes: getRouters(),
-              theme: value
-                  ? StylesApp.darkTheme(context)
-                  : StylesApp.lightTheme(context));
-        });
+            home: Home(),
+            routes: getRouters(),
+            theme: themeProvider.isDarkTheme
+                ? StylesApp.darkTheme(context)
+                : StylesApp.lightTheme(context),
+          );
+        },
+      ),
+    );
   }
 }
-
 
 
 
